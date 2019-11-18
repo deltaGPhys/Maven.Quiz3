@@ -1,5 +1,8 @@
 package rocks.zipcode.io.quiz3.arrays;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * @author leon on 09/12/2018.
  */
@@ -14,6 +17,14 @@ public class SquareArrayAnalyzer {
      * @return true if each `inputArray[i]` has a corresponding `squaredValues[j]` such that `squaredValues[j] == inputArray[i] * inputArray[i]`
      */
     public static Boolean compare(Integer[] inputArray, Integer[] squaredValues) {
-        return null;
+        if (inputArray.length != squaredValues.length) {
+            return false;
+        }
+        ArrayList squaredVals = new ArrayList<Integer>(Arrays.asList(squaredValues));
+        Long squareCount = Arrays.stream(inputArray).filter( x -> squaredVals.contains(x*x)).count();
+        if (squareCount == squaredValues.length){
+            return true;
+        }
+        return false;
     }
 }
