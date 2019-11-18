@@ -27,6 +27,11 @@ public class ArrayUtility<SomeType> {
     }
 
     public SomeType[] filter(Function<SomeType, Boolean> predicate) {
-        return Arrays.stream(array).filter(predicate).toArray();
+        Object[] results = Arrays.stream(array).filter(predicate::apply).toArray();
+        SomeType[] target = Arrays.copyOf(array, results.length);
+        for (int i = 0; i < results.length; i++) {
+            target[i] = (SomeType) results[i];
+        }
+        return target;
     }
 }
